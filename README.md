@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## NVM
+
+For managing the node version `nvm` is used and a `.nvmrc` file was provided.
+Install nvm from [here](https://github.com/nvm-sh/nvm) and then run `nvm use` and that's it.
 
 ## Available Scripts
 
