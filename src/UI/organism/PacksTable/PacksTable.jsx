@@ -25,10 +25,10 @@ const packTableColums = [
 	}
 ];
 
-function PacksTable({ text, packs, onDelete }) {
+function PacksTable({ text, packs, onDelete, afterDelete }) {
 	const renderAction = ({ purchases, id }) =>
 		purchases.length === 0 ? (
-			<LinkButton text="Eliminar" onClick={() => onDelete(id)} />
+			<LinkButton text="Eliminar" onClick={() => onDelete(id)} afterClick={afterDelete}/>
 		) : (
 			<p></p>
 		);

@@ -8,22 +8,22 @@ import { getPacks, deletePack } from "../../../APIs/packs";
 function Packs() {
 	const [packs, setPacks] = useState(undefined);
 
-	const onDelete = packId =>
-		deletePack(packId)
-			.then(() => getPacks().then(setPacks))
-			.catch(err => {
-				console.log(err);
-				message.error(err);
-			});
-
-	if (packs === undefined)
+	const fetchPacks = () =>
 		getPacks()
 			.then(setPacks)
 			.catch(err => {
 				console.log(err);
-				message.error(err);
+				message.error(err.message);
 				return setPacks([]);
 			});
+
+	const onDelete = packId =>
+		deletePack(packId).catch(err => {
+			console.log(err);
+			message.error(err.message);
+		});
+
+	if (packs === undefined) fetchPacks();
 
 	return (
 		<div>
@@ -42,7 +42,12 @@ function Packs() {
 				</Row>
 			</div>
 			<Divider />
-			<PacksTable text="Packs Actuales" packs={packs} onDelete={onDelete} />
+			<PacksTable
+				text="Packs Actuales"
+				packs={packs}
+				onDelete={onDelete}
+				afterDelete={fetchPacks}
+			/>
 		</div>
 	);
 }
