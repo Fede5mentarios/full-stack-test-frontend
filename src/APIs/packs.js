@@ -12,17 +12,26 @@ export const getPack = packId =>
 		method: "get"
 	});
 
-export const createPack = pack => 
-	request(
-		{
-			url: "/config/pack",
-			method: "post",
-			data: pack
-		}
-	)
+export const createPack = pack =>
+	request({
+		url: "/config/pack",
+		method: "post",
+		data: pack
+	});
 
-export const deletePack = packId =>
+const _deletePack = packId =>
 	request({
 		url: `/config/pack/${packId}`,
 		method: "delete"
+	});
+
+export const deletePack = packId =>
+	getPack(packId).then(pack => {
+		console.log("pack to delete:", pack);
+		if (pack.purchases.length === 0) {
+			console.log("deleting pack:", packId);
+			return _deletePack(packId);
+		} else {
+			return Promise.reject("Pack en uso");
+		}
 	});

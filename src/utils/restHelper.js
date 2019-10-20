@@ -6,13 +6,14 @@ const axiosInstance = axios.create({
 });
 
 export const validator = response =>
-	new Promise((resolve, reject) => {
+	new Promise(async (resolve, reject) => {
 		try {
 			if (response.data && response.data.errorCode) {
 				reject(response.data);
 				return;
-			}
-			resolve(response.data);
+      }
+      await sleep(2000);  // FIXME - to simulate some backend delay
+      resolve(response.data);
 		} catch (error) {
 			reject(error);
 		}
@@ -31,4 +32,8 @@ export const request = options => {
 		options
 	);
 	return axiosInstance.request(requestConfig).then(validator);
+};
+
+export const sleep = ms => {
+	return new Promise(resolve => setTimeout(resolve, ms));
 };

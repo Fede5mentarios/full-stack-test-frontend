@@ -1,8 +1,7 @@
 import React from "react";
-import { Table, Empty, Spin, Icon, Row, Col } from "antd";
+import { Table, Empty, Spin, Row, Col } from "antd";
 import Title from "../../atoms/Title/Title";
-
-const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
+import LoadingIcon from "../../atoms/LoadingIcon";
 
 function CustomTable({ text, dataSource, columns }) {
 	const isLoading = !dataSource;
@@ -12,11 +11,19 @@ function CustomTable({ text, dataSource, columns }) {
 			<Title text={text} />
 			<Row type="flex" justify="space-around">
 				<Col span={22}>
-					<Spin indicator={antIcon} spinning={isLoading}>
+					<Spin indicator={LoadingIcon} spinning={isLoading}>
 						{noData ? (
 							<Empty />
 						) : (
-							isLoading || <Table columns={columns} dataSource={dataSource} />
+							isLoading || (
+								<Table
+									loading={isLoading}
+									bordered={true}
+									columns={columns}
+									dataSource={dataSource}
+									pagination={false}
+								/>
+							)
 						)}
 					</Spin>
 				</Col>
