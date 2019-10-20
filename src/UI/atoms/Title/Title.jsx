@@ -1,10 +1,17 @@
 import React from "react";
+import { Row } from "antd";
 
 function Title({ text, subtitle }) {
 	return (
 		<>
-			<p>{text}</p>
-			{subtitle && <p>{subtitle}</p>}
+			<Row type="flex" justify="center">
+				<p>{text}</p>
+			</Row>
+			{subtitle && (
+				<Row type="flex" justify="center">
+					<p>{subtitle}</p>
+				</Row>
+			)}
 		</>
 	);
 }
