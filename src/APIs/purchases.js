@@ -1,6 +1,6 @@
 import { request } from "../utils/restHelper";
 
-export const getPacks = userId =>
+export const getPurchases = userId =>
 	request({
 		url: `/purchase/user/${userId}`,
 		method: "get"
