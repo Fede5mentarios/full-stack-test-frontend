@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "antd";
 import CustomTable from "../../molecules/CustomTable/CustomTable";
+import LinkButton from "../../atoms/LinkButton/LinkButton";
 
 const packTableColums = [
 	{
@@ -20,19 +20,24 @@ const packTableColums = [
 	},
 	{
 		title: "Acción",
-		dataIndex: "canBeDeleted",
-		key: "canBeDeleted",
-		render: canBeDeleted =>
-			canBeDeleted ? <Button type="link">Eliminar</Button> : <p></p>
+		dataIndex: "action",
+		key: "action"
 	}
 ];
 
-const convertPacksDTOInTableRow = pack =>
-	Object.assign({}, pack, {
-		canBeDeleted: pack.purchases.length === 0
-	});
+function PacksTable({ text, packs, onDelete }) {
+	const renderAction = ({ purchases, id }) =>
+		purchases.length === 0 ? (
+			<LinkButton text="Eliminar" onClick={() => onDelete(id)} />
+		) : (
+			<p></p>
+		);
 
-function PacksTable({ text, packs }) {
+	const convertPacksDTOInTableRow = pack =>
+		Object.assign({}, pack, {
+			action: renderAction(pack)
+		});
+
 	const rows = packs && packs.map(convertPacksDTOInTableRow);
 	return (
 		<CustomTable text={text} dataSource={rows} columns={packTableColums} />
