@@ -4,6 +4,7 @@ import PacksTable from "../../organism/PacksTable/PacksTable";
 import CustomButton from "../../atoms/CustomButton/CustomButton";
 import Title from "../../atoms/Title/Title";
 import { getPacks, deletePack } from "../../../APIs/packs";
+import NewPackModal from "../../organism/NewPackModal/NewPackModal";
 
 function Packs() {
 	const [packs, setPacks] = useState(undefined);
@@ -34,7 +35,7 @@ function Packs() {
 			<div>
 				<Row type="flex" justify="space-around">
 					<Col span={3}>
-						<CustomButton text="Nuevo Pack" onClick={() => {}} />
+						<NewPackModal text="Nuevo Pack" onClick={() => {}} />
 					</Col>
 					<Col span={3}>
 						<CustomButton text="Ver historial Compras" onClick={() => {}} />
