@@ -7,18 +7,21 @@ class LinkButton extends React.Component {
 	onButtonClicked = (onClick, afterClick) => {
 		return () =>
 			this.setState({ loading: true }, () =>
-				onClick().then(() =>
-					this.setState({ loading: false }, afterClick)
-				)
+				onClick()
+				.then(result =>
+					this.setState({ loading: false }, () => afterClick(result))
+				).catch(() =>
+					this.setState({ loading: false })	
+				)				
 			);
 	};
 
 	render() {
 		const { loading } = this.state;
-		const { text, onClick, afterClick } = this.props;
+		const { text, onClick, afterClick, type = "link" } = this.props;
 		return (
 			<Button
-				type="link"
+				type={type}
 				onClick={this.onButtonClicked(onClick, afterClick)}
 				disabled={loading}
 				loading={loading}
