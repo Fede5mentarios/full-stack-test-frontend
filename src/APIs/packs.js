@@ -32,6 +32,6 @@ export const deletePack = packId =>
 			console.log("deleting pack:", packId);
 			return _deletePack(packId);
 		} else {
-			return Promise.reject("Pack en uso");
+			return Promise.reject(new Error("Pack en uso"));
 		}
 	});
