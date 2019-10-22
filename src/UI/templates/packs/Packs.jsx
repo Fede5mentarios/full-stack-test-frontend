@@ -35,7 +35,7 @@ function Packs() {
 			<div>
 				<Row type="flex" justify="space-around">
 					<Col span={3}>
-						<NewPackModal text="Nuevo Pack" onClick={() => {}} />
+						<NewPackModal onResult={fetchPacks} packs={packs} />
 					</Col>
 					<Col span={3}>
 						<CustomButton text="Ver historial Compras" onClick={() => {}} />

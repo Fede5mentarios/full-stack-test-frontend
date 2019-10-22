@@ -1,41 +1,34 @@
 import React, { useState } from "react";
 import { Modal } from "antd";
 import CustomButton from "../../atoms/CustomButton/CustomButton";
-import NewPackForm from "../../molecules/NewPackForm/NewPackForm";
+import NewPackForm from "../NewPackForm/NewPackForm";
 
-function NewPackModal({ text }) {
+function NewPackModal({ onResult, packs }) {
 	const [visible, setVisible] = useState(false);
 
 	const showModal = () => setVisible(true);
 
-	const handleOk = e => {
-		setVisible(false);
-	};
-
-	const handleCancel = e => {
+	const closeModal = e => {
 		setVisible(false);
 	};
 
 	const onFormResult = result => {
-		if (result) {
-			handleOk();
-		} else {
-			handleCancel();
-		}
+		closeModal();
+		return onResult && onResult(result);
 	};
 
 	return (
 		<div>
-			<CustomButton text={text} onClick={showModal} />
+			<CustomButton text="Nuevo Pack" onClick={showModal} />
 			<Modal
 				title="Alta pack prepago"
-				onOk={handleOk}
+				onOk={closeModal}
 				visible={visible}
-				onCancel={handleCancel}
-        destroyOnClose={true}
-        footer={null}
+				onCancel={closeModal}
+				destroyOnClose={true}
+				footer={null}
 			>
-				<NewPackForm onResult={onFormResult} />
+				<NewPackForm packs={packs} onResult={onFormResult} />
 			</Modal>
 		</div>
 	);
