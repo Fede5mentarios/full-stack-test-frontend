@@ -11,9 +11,8 @@ export const validator = response =>
 			if (response.data && response.data.errorCode) {
 				reject(response.data);
 				return;
-      }
-      await sleep(2000);  // FIXME - to simulate some backend delay
-      resolve(response.data);
+			}
+			resolve(response.data);
 		} catch (error) {
 			reject(error);
 		}

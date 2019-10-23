@@ -1,15 +1,16 @@
 import React from "react";
-import { Form, Input, Row, Col, Divider } from "antd";
+import { Form, Row, Col, Divider } from "antd";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
 import { createPack } from "../../../APIs/packs";
 import NewBoltonFormItem from "../../molecules/NewBoltonFormItem/NewBoltonFormItem";
 import { convertToPack, formBasicItems } from "./newPackFormHelper";
+import FormInput from "../../molecules/FormInput/FormInput";
 
 function NewPackForm({
 	form: { getFieldDecorator, validateFields },
-	onResult, packs
+	onResult,
+	packs
 }) {
-
 	const onSubmit = () =>
 		new Promise((resolve, reject) => {
 			validateFields((err, values) => {
@@ -25,12 +26,8 @@ function NewPackForm({
 
 	return (
 		<Form>
-			{formBasicItems(packs).map(({ title, key, rules, type }) => (
-				<Form.Item label={title} key={key}>
-					{getFieldDecorator(key, {
-						rules: [{ required: true, message: "Campo obligatorio" }, ...rules]
-					})(<Input type={type} />)}
-				</Form.Item>
+			{formBasicItems(packs).map(input => (
+				<FormInput input={input} getFieldDecorator={getFieldDecorator} />
 			))}
 			<Divider />
 			<NewBoltonFormItem getFieldDecorator={getFieldDecorator} />

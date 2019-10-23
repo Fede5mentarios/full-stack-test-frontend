@@ -24,14 +24,12 @@ export const formBasicItems = existingPacks => {
 			title: "Costo",
 			type: "number",
 			key: "cost",
-			unit: "ARG",
-			rules: [{ min: 0, message: "El precio del pack debe ser positivo" }]
+			unit: "ARG"
 		},
 		{
 			title: "Vigencia",
 			key: "days",
-			type: "integer",
-			rules: [{ min: 0, message: "El precio del pack debe ser positivo" }]
+			type: "integer"
 		}
 	];
 };

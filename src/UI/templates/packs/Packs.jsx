@@ -1,30 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Divider, message, Row, Col } from "antd";
 import PacksTable from "../../organism/PacksTable/PacksTable";
 import CustomButton from "../../atoms/CustomButton/CustomButton";
 import Title from "../../atoms/Title/Title";
-import { getPacks, deletePack } from "../../../APIs/packs";
+import { deletePack } from "../../../APIs/packs";
 import NewPackModal from "../../organism/NewPackModal/NewPackModal";
 
-function Packs() {
-	const [packs, setPacks] = useState(undefined);
-
-	const fetchPacks = () =>
-		getPacks()
-			.then(setPacks)
-			.catch(err => {
-				console.log(err);
-				message.error(err.message);
-				return setPacks([]);
-			});
-
+function Packs({ fetchPacks, packs }) {
 	const onDelete = packId =>
 		deletePack(packId).catch(err => {
-			console.log(err);
 			message.error(err.message);
 		});
-
-	if (packs === undefined) fetchPacks();
 
 	return (
 		<div>
@@ -49,6 +35,7 @@ function Packs() {
 				onDelete={onDelete}
 				afterDelete={fetchPacks}
 			/>
+			)}
 		</div>
 	);
 }
