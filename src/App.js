@@ -1,9 +1,10 @@
 import React from "react";
-import Packs from "./UI/templates/packs/Packs";
+
 import "./App.css";
+import Router from "./UI/Router";
 
 function App() {
-	return <Packs />;
+	return <Router />;
 }
 
 export default App;

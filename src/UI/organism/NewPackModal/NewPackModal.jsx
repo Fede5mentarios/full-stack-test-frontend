@@ -28,7 +28,7 @@ function NewPackModal({ onResult, packs }) {
 				destroyOnClose={true}
 				footer={null}
 			>
-				<NewPackForm packs={packs} onResult={onFormResult} />
+				<NewPackForm packs={packs} onResult={onFormResult} />}
 			</Modal>
 		</div>
 	);
