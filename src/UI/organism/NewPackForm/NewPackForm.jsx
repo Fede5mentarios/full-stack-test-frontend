@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Row, Col, Divider } from "antd";
+import { Form, Row, Col, Divider, message } from "antd";
 import LinkButton from "../../atoms/LinkButton/LinkButton";
 import { createPack } from "../../../APIs/packs";
 import NewBoltonFormItem from "../../molecules/NewBoltonFormItem/NewBoltonFormItem";
@@ -15,19 +15,27 @@ function NewPackForm({
 		new Promise((resolve, reject) => {
 			validateFields((err, values) => {
 				if (!err) {
-					createPack(convertToPack(values))
-						.then(resolve)
-						.catch(reject);
+					try {
+						createPack(convertToPack(values))
+							.then(resolve)
+							.catch(reject);
+					} catch (e) {
+						message.error(e.message);
+						reject(e);
+					}
 				} else {
 					reject();
 				}
 			});
 		});
-
 	return (
 		<Form>
 			{formBasicItems(packs).map(input => (
-				<FormInput input={input} getFieldDecorator={getFieldDecorator} />
+				<FormInput
+					key={input.key}
+					input={input}
+					getFieldDecorator={getFieldDecorator}
+				/>
 			))}
 			<Divider />
 			<NewBoltonFormItem getFieldDecorator={getFieldDecorator} />

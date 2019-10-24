@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Divider, message, Row, Col } from "antd";
 import PacksTable from "../../organism/PacksTable/PacksTable";
 import CustomButton from "../../atoms/CustomButton/CustomButton";
@@ -7,12 +8,20 @@ import { deletePack } from "../../../APIs/packs";
 import NewPackModal from "../../organism/NewPackModal/NewPackModal";
 
 function Packs({ fetchPacks, packs }) {
+	const [showPurchases, goToPurchases] = useState(false);
 	const onDelete = packId =>
 		deletePack(packId).catch(err => {
 			message.error(err.message);
 		});
 
-	return (
+	return showPurchases ? (
+		<Redirect
+			to={{
+				pathname: "/compras",
+				path: "/compras"
+			}}
+		/>
+	) : (
 		<div>
 			<Title
 				text="Pack Prepagos"
@@ -24,7 +33,10 @@ function Packs({ fetchPacks, packs }) {
 						<NewPackModal onResult={fetchPacks} packs={packs} />
 					</Col>
 					<Col span={3}>
-						<CustomButton text="Ver historial Compras" onClick={() => {}} />
+						<CustomButton
+							text="Ver historial Compras"
+							onClick={() => goToPurchases(true)}
+						/>
 					</Col>
 				</Row>
 			</div>

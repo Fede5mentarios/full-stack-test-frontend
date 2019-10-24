@@ -35,12 +35,4 @@ function PurchaseTable({ text, purchases, packs }) {
 		<CustomTable text={text} dataSource={rows} columns={packTableColums} />
 	);
 }
-
-// export default connect(
-// 	(state, ownProps) => ({
-// 		packs: state.packs,
-// 		...ownProps
-// 	}),
-// 	null
-// )(PurchaseTable);
 export default PurchaseTable

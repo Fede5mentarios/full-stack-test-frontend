@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { message } from "antd";
 import Packs from "./templates/packs/Packs";
 import Purchases from "./templates/purchases/Purchases";
 import { Empty } from "antd";
 import { getPacks } from "../APIs/packs";
 
-function Router({ dispatch }) {
+function Router() {
 	const [packs, setPacks] = useState(undefined);
 
 	const fetchPacks = () =>
@@ -22,6 +22,18 @@ function Router({ dispatch }) {
 	return (
 		<BrowserRouter>
 			<Switch>
+				<Route
+					exact
+					path="/"
+					component={() => (
+						<Redirect
+							to={{
+								pathname: "/config",
+								path: "/config"
+							}}
+						/>
+					)}
+				/>
 				<Route
 					exact
 					path="/config"
